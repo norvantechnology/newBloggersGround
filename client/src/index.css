@@ -2,6 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom animations */
+@keyframes kenburns {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 20s ease-in-out infinite;
+}
+
+/* Blog content styling */
+.blog-content {
+  @apply text-lg leading-relaxed;
+}
+
+.blog-content p {
+  @apply mb-6 text-slate-800 dark:text-slate-200;
+}
+
+.blog-content h2 {
+  @apply text-2xl font-bold mt-10 mb-4 text-slate-900 dark:text-white;
+}
+
+.blog-content ul {
+  @apply list-disc pl-6 mb-6 space-y-2;
+}
+
+.blog-content blockquote {
+  @apply border-l-4 border-primary pl-4 italic my-6 text-slate-700 dark:text-slate-300;
+}
+
+/* Table of contents */
+.blog-toc {
+  @apply bg-slate-50 dark:bg-slate-800/50 p-5 rounded-xl sticky top-4;
+}
+
+.blog-toc h3 {
+  @apply text-lg font-bold mb-4 text-slate-900 dark:text-white;
+}
+
+.blog-toc ul {
+  @apply space-y-2;
+}
+
+.blog-toc li {
+  @apply text-slate-600 dark:text-slate-300;
+}
+
+.blog-toc a {
+  @apply hover:text-primary dark:hover:text-primary-foreground transition;
+}
+
+/* Reading progress indicator */
+.reading-progress-bar {
+  @apply fixed top-0 left-0 h-1 bg-primary z-50;
+}
+
 @layer base {
   * {
     @apply border-border;

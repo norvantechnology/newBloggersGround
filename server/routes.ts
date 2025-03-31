@@ -135,6 +135,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Add a comment
+  app.post("/api/comments", async (req, res) => {
+    try {
+      const { content, blogPostId, webStoryId, authorId } = req.body;
+      
+      // Validate input
+      if (!content || (!blogPostId && !webStoryId) || !authorId) {
+        return res.status(400).json({ 
+          message: "Invalid request. Please provide content, authorId, and either blogPostId or webStoryId." 
+        });
+      }
+      
+      const newComment = await storage.createComment({
+        content,
+        blogPostId,
+        webStoryId,
+        authorId
+      });
+      
+      res.status(201).json(newComment);
+    } catch (error) {
+      console.error("Error creating comment:", error);
+      res.status(500).json({ message: "Failed to create comment" });
+    }
+  });
+  
   // Authentication
   const loginSchema = z.object({
     email: z.string().email(),
