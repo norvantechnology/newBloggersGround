@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, getQueryFn } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
@@ -27,14 +27,31 @@ export default function BlogDetailPage() {
   }, [blogId, navigate]);
   
   // Fetch blog post details
-  const { data: blog, isLoading } = useQuery<BlogPost>({
+  const { data: blog, isLoading, isError } = useQuery<BlogPost>({
     queryKey: ["/api/blogs", blogId],
+    queryFn: async () => {
+      if (!blogId) return null;
+      try {
+        const response = await fetch(`/api/blogs/${blogId}`);
+        if (!response.ok) {
+          console.error('Blog post fetch error:', response.status);
+          throw new Error('Blog post not found');
+        }
+        const data = await response.json();
+        console.log('Blog data:', data);
+        return data;
+      } catch (error) {
+        console.error('Error fetching blog post:', error);
+        throw error;
+      }
+    },
     enabled: !!blogId,
   });
   
   // Fetch blog comments
   const { data: comments = [], refetch: refetchComments } = useQuery<Comment[]>({
-    queryKey: ["/api/comments/blog", blogId],
+    queryKey: [`/api/blogs/${blogId}/comments`],
+    queryFn: getQueryFn({ on401: "returnNull" }),
     enabled: !!blogId,
   });
   
@@ -50,14 +67,21 @@ export default function BlogDetailPage() {
     }
     
     try {
-      await apiRequest("/api/comments", {
+      const response = await fetch("/api/comments", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           content: comment,
           blogPostId: blogId,
-          userId: 1, // For demo, we're using a fixed user ID
+          authorId: 1, // For demo, we're using a fixed author ID
         }),
       });
+      
+      if (!response.ok) {
+        throw new Error("Failed to add comment");
+      }
       
       setComment("");
       refetchComments();
@@ -73,7 +97,7 @@ export default function BlogDetailPage() {
     }
   };
   
-  if (isLoading || !blog) {
+  if (isLoading) {
     return (
       <MainLayout>
         <div className="container mx-auto px-4 py-12">
@@ -88,6 +112,24 @@ export default function BlogDetailPage() {
                 <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded-md w-3/4"></div>
               </div>
             </div>
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
+  
+  if (isError || !blog) {
+    return (
+      <MainLayout>
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-3xl font-bold mb-4">Blog Post Not Found</h1>
+            <p className="text-slate-600 dark:text-slate-400 mb-8">
+              The blog post you're looking for doesn't exist or has been removed.
+            </p>
+            <Button onClick={() => navigate("/blogs")}>
+              Back to All Blogs
+            </Button>
           </div>
         </div>
       </MainLayout>
@@ -148,11 +190,11 @@ export default function BlogDetailPage() {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src={blog.author.avatar} alt={blog.author.name} />
-                  <AvatarFallback>{blog.author.name.substring(0, 2)}</AvatarFallback>
+                  <AvatarImage src={blog.author?.avatar || ''} alt={blog.author?.name || 'Author'} />
+                  <AvatarFallback>{blog.author?.name?.substring(0, 2) || 'AU'}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium">{blog.author.name}</p>
+                  <p className="font-medium">{blog.author?.name || 'Anonymous'}</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">{blog.publishedDate}</p>
                 </div>
               </div>
@@ -183,7 +225,7 @@ export default function BlogDetailPage() {
             className="mb-10 overflow-hidden rounded-2xl"
           >
             <img 
-              src={blog.image} 
+              src={blog.imageUrl} 
               alt={blog.title} 
               className="w-full hover:scale-105 transition-transform duration-700 ease-in-out"
             />
@@ -280,12 +322,12 @@ export default function BlogDetailPage() {
                     <div className="flex items-start gap-3">
                       <Avatar className="h-8 w-8">
                         <AvatarFallback>
-                          {comment.userId.toString().substring(0, 2)}
+                          {comment.authorId.toString().substring(0, 2)}
                         </AvatarFallback>
                       </Avatar>
                       <div>
                         <div className="flex items-center gap-2 mb-1">
-                          <p className="font-medium">User {comment.userId}</p>
+                          <p className="font-medium">User {comment.authorId}</p>
                           <span className="text-xs text-slate-500 dark:text-slate-400">
                             {new Date(comment.createdAt).toLocaleDateString()}
                           </span>
@@ -324,7 +366,7 @@ export default function BlogDetailPage() {
                       <div className="w-full h-full bg-slate-200 dark:bg-slate-700 group-hover:scale-105 transition-transform duration-500"></div>
                     </div>
                     <div className="p-4">
-                      <Badge size="sm" variant="outline" className="mb-2">
+                      <Badge variant="outline" className="mb-2 text-xs py-0 px-2">
                         {blog.category}
                       </Badge>
                       <h4 className="font-bold group-hover:text-primary transition-colors">
