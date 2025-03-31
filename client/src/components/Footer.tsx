@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -18,18 +19,34 @@ export default function Footer() {
               A modern platform for passionate writers and avid readers to share and discover fresh perspectives on various topics.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
+              <motion.a 
+                whileHover={{ scale: 1.1, y: -3 }}
+                href="#" 
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors"
+              >
                 <i className="ri-twitter-x-line"></i>
-              </a>
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.1, y: -3 }}
+                href="#" 
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors"
+              >
                 <i className="ri-facebook-fill"></i>
-              </a>
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.1, y: -3 }}
+                href="#" 
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors"
+              >
                 <i className="ri-instagram-line"></i>
-              </a>
-              <a href="#" className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors">
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.1, y: -3 }}
+                href="#" 
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors"
+              >
                 <i className="ri-linkedin-fill"></i>
-              </a>
+              </motion.a>
             </div>
           </div>
           
@@ -37,48 +54,36 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              <li>
-                <Link href="/">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Home
-                  </a>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Home
                 </Link>
-              </li>
-              <li>
-                <Link href="/blogs">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Blogs
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/blogs" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Blogs
                 </Link>
-              </li>
-              <li>
-                <Link href="/web-stories">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Web Stories
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/web-stories" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Web Stories
                 </Link>
-              </li>
-              <li>
-                <Link href="/categories">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Categories
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/categories" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Categories
                 </Link>
-              </li>
-              <li>
-                <Link href="/about">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    About Us
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  About Us
                 </Link>
-              </li>
-              <li>
-                <Link href="/contact">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Contact
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/contact" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Contact
                 </Link>
-              </li>
+              </motion.li>
             </ul>
           </div>
           
@@ -86,48 +91,36 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Categories</h3>
             <ul className="space-y-3">
-              <li>
-                <Link href="/blogs?category=technology">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Technology
-                  </a>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/blogs?category=technology" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Technology
                 </Link>
-              </li>
-              <li>
-                <Link href="/blogs?category=fashion">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Fashion
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/blogs?category=fashion" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Fashion
                 </Link>
-              </li>
-              <li>
-                <Link href="/blogs?category=lifestyle">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Lifestyle
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/blogs?category=lifestyle" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Lifestyle
                 </Link>
-              </li>
-              <li>
-                <Link href="/blogs?category=food">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Food
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/blogs?category=food" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Food
                 </Link>
-              </li>
-              <li>
-                <Link href="/blogs?category=travel">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Travel
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/blogs?category=travel" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Travel
                 </Link>
-              </li>
-              <li>
-                <Link href="/blogs?category=business">
-                  <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                    Business
-                  </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                <Link href="/blogs?category=business" className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                  Business
                 </Link>
-              </li>
+              </motion.li>
             </ul>
           </div>
           
@@ -135,18 +128,27 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Contact Us</h3>
             <div className="space-y-3">
-              <p className="flex items-start gap-3 text-slate-600 dark:text-slate-300">
+              <motion.p 
+                whileHover={{ x: 5 }}
+                className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
+              >
                 <i className="ri-map-pin-line mt-1"></i>
                 <span>123 Blogger Street, Digital City, 45678</span>
-              </p>
-              <p className="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+              </motion.p>
+              <motion.p 
+                whileHover={{ x: 5 }}
+                className="flex items-center gap-3 text-slate-600 dark:text-slate-300"
+              >
                 <i className="ri-mail-line"></i>
                 <span>info@bloggersground.com</span>
-              </p>
-              <p className="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+              </motion.p>
+              <motion.p 
+                whileHover={{ x: 5 }}
+                className="flex items-center gap-3 text-slate-600 dark:text-slate-300"
+              >
                 <i className="ri-phone-line"></i>
                 <span>+1 (555) 123-4567</span>
-              </p>
+              </motion.p>
             </div>
           </div>
         </div>
@@ -160,20 +162,14 @@ export default function Footer() {
               © 2023 Bloggers Ground. All rights reserved.
             </p>
             <div className="flex gap-4 text-sm">
-              <Link href="/privacy-policy">
-                <a className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                  Privacy Policy
-                </a>
+              <Link href="/privacy-policy" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                Privacy Policy
               </Link>
-              <Link href="/terms-of-service">
-                <a className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                  Terms of Service
-                </a>
+              <Link href="/terms-of-service" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                Terms of Service
               </Link>
-              <Link href="/cookie-policy">
-                <a className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-400 transition-colors">
-                  Cookie Policy
-                </a>
+              <Link href="/cookie-policy" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-400 transition-colors">
+                Cookie Policy
               </Link>
             </div>
           </div>

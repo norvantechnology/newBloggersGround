@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/HomePage";
 import BlogPage from "@/pages/BlogPage";
+import BlogDetailPage from "@/pages/BlogDetailPage";
 import WebStoriesPage from "@/pages/WebStoriesPage";
 import AboutPage from "@/pages/AboutPage";
 import LoginPage from "@/pages/LoginPage";
@@ -16,6 +17,7 @@ function Router() {
     <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/blogs" component={BlogPage} />
+      <Route path="/blog/:id" component={BlogDetailPage} />
       <Route path="/web-stories" component={WebStoriesPage} />
       <Route path="/about" component={AboutPage} />
       <Route path="/login" component={LoginPage} />
