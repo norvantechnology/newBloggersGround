@@ -3,50 +3,66 @@ import { Category } from './schema';
 export const categories: Category[] = [
   {
     id: 1,
-    name: 'Technology',
-    slug: 'technology',
-    description: 'Latest news and insights about software development, programming languages, and tech trends',
-    color: '#3B82F6',
-    articleCount: 24,
+    name: "Technology",
+    slug: "technology",
+    description: "Latest news and insights on technology trends, innovations, and digital transformation.",
+    color: "#3b82f6",
+    articleCount: 15
   },
   {
     id: 2,
-    name: 'Design',
-    slug: 'design',
-    description: 'UI/UX design principles, tools, and inspiration for creating beautiful digital experiences',
-    color: '#EC4899',
-    articleCount: 18,
+    name: "Fashion",
+    slug: "fashion",
+    description: "Style guides, fashion trends, sustainable clothing, and designer spotlights.",
+    color: "#ec4899",
+    articleCount: 12
   },
   {
     id: 3,
-    name: 'Web Development',
-    slug: 'web-development',
-    description: 'Frontend and backend development techniques, frameworks, and best practices',
-    color: '#10B981',
-    articleCount: 32,
+    name: "Marketing",
+    slug: "marketing",
+    description: "Strategies, case studies, and tools for effective digital and traditional marketing.",
+    color: "#f59e0b",
+    articleCount: 8
   },
   {
     id: 4,
-    name: 'AI & Machine Learning',
-    slug: 'ai-machine-learning',
-    description: 'Artificial intelligence advances, machine learning tutorials, and practical applications',
-    color: '#8B5CF6',
-    articleCount: 15,
+    name: "Travel",
+    slug: "travel",
+    description: "Destinations, travel tips, cultural experiences, and adventure stories from around the world.",
+    color: "#84cc16",
+    articleCount: 10
   },
   {
     id: 5,
-    name: 'DevOps',
-    slug: 'devops',
-    description: 'Infrastructure as code, CI/CD pipelines, cloud services, and deployment strategies',
-    color: '#F59E0B',
-    articleCount: 10,
+    name: "Health",
+    slug: "health",
+    description: "Wellness advice, fitness tips, mental health resources, and medical breakthroughs.",
+    color: "#10b981",
+    articleCount: 14
   },
   {
     id: 6,
-    name: 'Career',
-    slug: 'career',
-    description: 'Career development, job searching, interviewing tips, and professional growth',
-    color: '#EF4444',
-    articleCount: 8,
+    name: "Photography",
+    slug: "photography",
+    description: "Photography techniques, equipment reviews, inspiration, and visual storytelling.",
+    color: "#0ea5e9",
+    articleCount: 9
   },
+  {
+    id: 7,
+    name: "Finance",
+    slug: "finance",
+    description: "Personal finance advice, investment strategies, and economic analysis.",
+    color: "#8b5cf6",
+    articleCount: 7
+  },
+  {
+    id: 8,
+    name: "Food",
+    slug: "food",
+    description: "Recipes, cooking techniques, restaurant reviews, and food culture from around the world.",
+    color: "#f43f5e",
+    articleCount: 11
+  }
 ];

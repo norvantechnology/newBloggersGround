@@ -3,50 +3,34 @@ import { TrendingItem } from './schema';
 export const trendingItems: TrendingItem[] = [
   {
     id: 1,
-    title: 'The Future of Web Development: WebAssembly and Edge Computing',
-    slug: 'future-web-development-webassembly-edge-computing',
-    category: 'Web Development',
-    categoryColor: '#10B981',
-    views: '12.5K',
+    title: "The Future of Artificial Intelligence in Healthcare",
+    slug: "future-of-ai-in-healthcare",
+    category: "Technology",
+    categoryColor: "#3b82f6",
+    views: "1.2K"
   },
   {
     id: 2,
-    title: 'Understanding Design Systems: Building for Scale and Consistency',
-    slug: 'understanding-design-systems-scale-consistency',
-    category: 'Design',
-    categoryColor: '#EC4899',
-    views: '8.7K',
-  },
-  {
-    id: 3,
-    title: 'Advanced TypeScript Patterns for Enterprise Applications',
-    slug: 'advanced-typescript-patterns-enterprise-applications',
-    category: 'Technology',
-    categoryColor: '#3B82F6',
-    views: '10.2K',
-  },
-  {
-    id: 4,
-    title: 'Implementing CI/CD Pipelines with GitHub Actions',
-    slug: 'implementing-cicd-pipelines-github-actions',
-    category: 'DevOps',
-    categoryColor: '#F59E0B',
-    views: '7.1K',
+    title: "Sustainable Fashion: The Rise of Eco-Friendly Brands",
+    slug: "sustainable-fashion-eco-friendly-brands",
+    category: "Fashion",
+    categoryColor: "#ec4899",
+    views: "980"
   },
   {
     id: 5,
-    title: 'Building AI-Powered Chatbots: From Concept to Deployment',
-    slug: 'building-ai-powered-chatbots-concept-deployment',
-    category: 'AI & Machine Learning',
-    categoryColor: '#8B5CF6',
-    views: '15.3K',
+    title: "The Science of Sleep: How to Optimize Your Rest for Better Health",
+    slug: "science-of-sleep-optimize-rest",
+    category: "Health",
+    categoryColor: "#10b981",
+    views: "890"
   },
   {
-    id: 6,
-    title: 'Navigating Technical Interviews: Tips from Hiring Managers',
-    slug: 'navigating-technical-interviews-tips-hiring-managers',
-    category: 'Career',
-    categoryColor: '#EF4444',
-    views: '9.8K',
-  },
+    id: 10,
+    title: "The Rise of Remote Work: How to Thrive in a Virtual Environment",
+    slug: "rise-of-remote-work",
+    category: "Career",
+    categoryColor: "#8b5cf6",
+    views: "825"
+  }
 ];
