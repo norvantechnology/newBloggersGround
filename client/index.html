@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloggers Ground - Modern Blog Platform</title>
+  <meta name="description" content="Bloggers Ground - A modern platform featuring blogs on tech, fashion, and various other categories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <meta property="og:title" content="Bloggers Ground - Modern Blog Platform">
+  <meta property="og:description" content="Discover fresh perspectives on tech, fashion, lifestyle, and more from our community of passionate writers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bloggersground.com">
+  <style>
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .dark ::-webkit-scrollbar-track {
+      background: #1e1e1e;
+    }
+    
+    .dark ::-webkit-scrollbar-thumb {
+      background: #555;
+    }
+    
+    .dark ::-webkit-scrollbar-thumb:hover {
+      background: #777;
+    }
+
+    /* Web stories carousel */
+    .web-story-scroll {
+      scrollbar-width: none;
+    }
+    
+    .web-story-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .story-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      border-radius: 0 0 0.75rem 0.75rem;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
