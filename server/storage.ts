@@ -4,7 +4,7 @@ import {
   BlogPost, InsertBlogPost, 
   WebStory, InsertWebStory,
   Comment, InsertComment
-} from "@shared/schema";
+} from "../shared/schema";
 
 export interface IStorage {
   // User operations
