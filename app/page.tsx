@@ -1,190 +1,149 @@
-import MainLayout from '../components/layout/MainLayout';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { categories } from '../data/categories';
-import { trendingItems } from '../data/trending';
+import MainLayout from '@/components/layout/MainLayout';
 
 export default function Home() {
   return (
     <MainLayout>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-muted/30">
-        <div className="container mx-auto px-4 py-20 lg:py-32">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Discover, Learn, and Share Knowledge
+      <div className="container py-12">
+        {/* Hero Section */}
+        <section className="py-12 md:py-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+              Welcome to <span className="text-primary">Bloggers Ground</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              A modern platform for tech enthusiasts, creators, and knowledge seekers.
-              Explore the latest insights in technology, design, and development.
+            <p className="mt-6 text-lg md:text-xl text-muted-foreground">
+              Discover insightful articles, engaging stories, and the latest trends
+              from our community of passionate writers.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/blog">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Explore Blog <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/webstories">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  View Web Stories
-                </Button>
-              </Link>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="/blog" 
+                className="px-6 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+              >
+                Explore Blogs
+              </a>
+              <a 
+                href="/webstories" 
+                className="px-6 py-3 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium"
+              >
+                View Web Stories
+              </a>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Categories Section */}
-      <section className="py-16 border-t border-border">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-end mb-10">
-            <div>
-              <h2 className="text-3xl font-bold mb-2">Explore Categories</h2>
-              <p className="text-muted-foreground">Discover content across various topics</p>
-            </div>
-            <Link href="/blog" className="text-primary font-medium flex items-center hover:underline">
-              View All <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
+        {/* Featured Categories Section (Placeholder) */}
+        <section className="py-12">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold">Explore Categories</h2>
+            <p className="mt-4 text-muted-foreground">
+              Find content that matches your interests
+            </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.slice(0, 6).map((category) => (
-              <Link 
-                href={`/blog?category=${category.slug}`}
-                key={category.id}
-                className="group relative overflow-hidden rounded-lg border border-border p-6 hover:border-primary transition-all"
-              >
-                <div 
-                  className="absolute top-0 left-0 w-2 h-full transition-all group-hover:w-full opacity-10 group-hover:opacity-20" 
-                  style={{ backgroundColor: category.color }}
-                />
-                <div className="relative">
-                  <h3 className="text-xl font-semibold mb-2 flex items-center">
-                    <span 
-                      className="w-3 h-3 rounded-full mr-2"
-                      style={{ backgroundColor: category.color }}
-                    ></span>
-                    {category.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {category.description}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">
-                      {category.articleCount} {category.articleCount === 1 ? 'Article' : 'Articles'}
-                    </span>
-                    <span className="text-primary text-sm font-medium flex items-center group-hover:underline">
-                      Explore <ArrowRight className="ml-1 h-3 w-3" />
-                    </span>
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Category Cards will be populated here */}
+            {[
+              { name: 'Technology', color: 'bg-blue-500' },
+              { name: 'Fashion', color: 'bg-pink-500' },
+              { name: 'Lifestyle', color: 'bg-green-500' },
+              { name: 'Travel', color: 'bg-amber-500' }
+            ].map((category, index) => (
+              <div key={index} className={`category-card group h-48 rounded-lg ${category.color} text-white`}>
+                <div className="absolute inset-0 category-overlay bg-black bg-opacity-30 transition-all duration-300"></div>
+                <div className="relative h-full flex flex-col items-center justify-center p-6">
+                  <h3 className="text-xl font-bold mb-2">{category.name}</h3>
+                  <p className="text-sm opacity-90">Discover {category.name} articles</p>
+                  <a href={`/blog?category=${category.name.toLowerCase()}`} className="mt-4 px-4 py-2 rounded-md bg-white/20 hover:bg-white/30 transition-colors duration-300">
+                    View Articles
+                  </a>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Trending Section */}
-      <section className="py-16 bg-muted/30 border-y border-border">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-end mb-10">
+        {/* Featured Blogs Section (Placeholder) */}
+        <section className="py-12">
+          <div className="flex justify-between items-center mb-10">
             <div>
-              <h2 className="text-3xl font-bold mb-2">Trending Now</h2>
-              <p className="text-muted-foreground">Most popular content based on views</p>
+              <h2 className="text-3xl font-bold">Featured Blogs</h2>
+              <p className="mt-2 text-muted-foreground">
+                Our most popular and trending articles
+              </p>
             </div>
+            <a 
+              href="/blog" 
+              className="hidden md:block px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium"
+            >
+              View All
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Blog Cards will be populated here */}
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="blog-card rounded-lg border bg-card overflow-hidden shadow-sm">
+                <div className="aspect-video w-full bg-muted"></div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
+                      Technology
+                    </span>
+                    <span className="text-xs text-muted-foreground">5 min read</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    A blog post title that catches your attention
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    A short excerpt from the blog post that gives the reader a quick overview of what the article is about...
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-muted"></div>
+                      <span className="text-sm">John Doe</span>
+                    </div>
+                    <span className="text-xs text-muted-foreground">March 28, 2025</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Featured item (larger) */}
-            <div className="bg-background rounded-lg border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow p-6">
-              <Link 
-                href={`/blog/${trendingItems[0].slug}`}
-                className="block"
-              >
-                <div className="flex items-center space-x-2 mb-3">
-                  <span 
-                    className="text-xs font-medium px-2.5 py-0.5 rounded-full" 
-                    style={{ 
-                      backgroundColor: `${trendingItems[0].categoryColor}20`, 
-                      color: trendingItems[0].categoryColor 
-                    }}
-                  >
-                    {trendingItems[0].category}
-                  </span>
-                  <span className="text-xs text-muted-foreground flex items-center">
-                    {trendingItems[0].views} views
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 hover:text-primary transition-colors">
-                  {trendingItems[0].title}
-                </h3>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-primary font-medium hover:underline">
-                    Read article <ArrowRight className="inline-block ml-1 h-3 w-3" />
-                  </span>
-                </div>
-              </Link>
-            </div>
-            
-            {/* List of other trending items */}
-            <div className="bg-background rounded-lg border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow divide-y divide-border">
-              {trendingItems.slice(1, 5).map((item) => (
-                <Link 
-                  key={item.id}
-                  href={`/blog/${item.slug}`}
-                  className="block p-4 hover:bg-muted/40 transition-colors"
-                >
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span 
-                      className="text-xs font-medium px-2 py-0.5 rounded-full" 
-                      style={{ 
-                        backgroundColor: `${item.categoryColor}20`, 
-                        color: item.categoryColor 
-                      }}
-                    >
-                      {item.category}
-                    </span>
-                    <span className="text-xs text-muted-foreground flex items-center">
-                      {item.views} views
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-semibold hover:text-primary transition-colors line-clamp-1">
-                    {item.title}
-                  </h3>
-                </Link>
-              ))}
-            </div>
+          <div className="text-center mt-8 md:hidden">
+            <a 
+              href="/blog" 
+              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium"
+            >
+              View All Blogs
+            </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="bg-primary/10 border border-primary/20 rounded-lg p-8 md:p-12 text-center max-w-4xl mx-auto">
-            <div className="mb-6 inline-flex items-center justify-center p-2 bg-primary/10 rounded-full">
-              <ArrowRight className="h-6 w-6 text-primary" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join our community of tech enthusiasts and start exploring the world of technology, design, and development today.
+        {/* Call to Action Section */}
+        <section className="py-12 my-12 bg-primary/5 rounded-lg">
+          <div className="max-w-3xl mx-auto text-center px-4">
+            <h2 className="text-3xl font-bold mb-6">Join Our Community</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Become a member of our growing community. Share your thoughts, discover new ideas,
+              and connect with like-minded individuals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/signup">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Sign Up Now
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  Learn More
-                </Button>
-              </Link>
+              <a 
+                href="/signup" 
+                className="px-6 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+              >
+                Sign Up Now
+              </a>
+              <a 
+                href="/login" 
+                className="px-6 py-3 rounded-md bg-muted text-foreground hover:bg-muted/60 font-medium"
+              >
+                Log In
+              </a>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </MainLayout>
   );
 }

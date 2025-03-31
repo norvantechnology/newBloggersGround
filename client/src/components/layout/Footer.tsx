@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'wouter';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 export default function Footer() {
@@ -42,12 +40,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href="/blogs" className="text-sm text-muted-foreground hover:text-primary">
                   Blogs
                 </Link>
               </li>
               <li>
-                <Link href="/webstories" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href="/web-stories" className="text-sm text-muted-foreground hover:text-primary">
                   Web Stories
                 </Link>
               </li>
@@ -69,27 +67,27 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/blog?category=technology" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href="/blogs?category=technology" className="text-sm text-muted-foreground hover:text-primary">
                   Technology
                 </Link>
               </li>
               <li>
-                <Link href="/blog?category=fashion" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href="/blogs?category=fashion" className="text-sm text-muted-foreground hover:text-primary">
                   Fashion
                 </Link>
               </li>
               <li>
-                <Link href="/blog?category=lifestyle" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href="/blogs?category=lifestyle" className="text-sm text-muted-foreground hover:text-primary">
                   Lifestyle
                 </Link>
               </li>
               <li>
-                <Link href="/blog?category=travel" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href="/blogs?category=travel" className="text-sm text-muted-foreground hover:text-primary">
                   Travel
                 </Link>
               </li>
               <li>
-                <Link href="/blog?category=food" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href="/blogs?category=food" className="text-sm text-muted-foreground hover:text-primary">
                   Food & Cooking
                 </Link>
               </li>

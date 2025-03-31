@@ -1,22 +1,33 @@
-'use client'
+'use client';
 
-import { Moon, Sun } from 'lucide-react'
-import { useTheme } from '../../lib/ThemeProvider'
-import { Button } from './button'
+import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
+import { Sun, Moon } from 'lucide-react';
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="w-9 h-9"></div>; // Placeholder to prevent layout shift
+  }
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
+    <button
+      className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle theme"
     >
-      <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Toggle theme</span>
-    </Button>
-  )
+      {theme === 'dark' ? (
+        <Sun className="w-5 h-5 text-white" />
+      ) : (
+        <Moon className="w-5 h-5" />
+      )}
+    </button>
+  );
 }

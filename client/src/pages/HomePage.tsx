@@ -1,143 +1,165 @@
-import MainLayout from "@/layouts/MainLayout";
-import Banner from "@/components/Banner";
-import BlogCard from "@/components/BlogCard";
-import TrendingList from "@/components/TrendingList";
-import WebStoryCard from "@/components/WebStoryCard";
-import CategoryCard from "@/components/CategoryCard";
-import Newsletter from "@/components/Newsletter";
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { Link } from 'wouter';
+import MainLayout from '@/components/layout/MainLayout';
 
 export default function HomePage() {
-  const { data: newArrivals = [] } = useQuery({
-    queryKey: ["/api/blogs/new-arrivals"],
-  });
-
-  const { data: trendingArticle } = useQuery({
-    queryKey: ["/api/blogs/trending/featured"],
-  });
-
-  const { data: trendingList = [] } = useQuery({
-    queryKey: ["/api/blogs/trending/list"],
-  });
-
-  const { data: webStories = [] } = useQuery({
-    queryKey: ["/api/web-stories"],
-  });
-
-  const { data: categories = [] } = useQuery({
-    queryKey: ["/api/categories"],
-  });
-
   return (
     <MainLayout>
       {/* Hero Section */}
-      <Banner />
-
-      {/* New Arrivals Section */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold font-heading">New Arrivals</h2>
-            <Link href="/blogs" className="flex items-center text-primary dark:text-primary-400 font-medium hover:underline">
-              View All <i className="ri-arrow-right-line ml-1"></i>
-            </Link>
+      <section className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-black/20 py-16 md:py-24">
+        <div className="container">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight animate-fadeIn">
+              Welcome to Bloggers Ground
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fadeIn">
+              A modern platform for writers, creators, and knowledge seekers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/blogs" className="px-6 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
+                Explore Blogs
+              </Link>
+              <Link href="/signup" className="px-6 py-3 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/90 font-medium">
+                Join Our Community
+              </Link>
+            </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {newArrivals.map((article) => (
-              <BlogCard key={article.id} article={article} />
+        </div>
+      </section>
+
+      {/* Featured Categories Section */}
+      <section className="py-16">
+        <div className="container">
+          <h2 className="text-3xl font-bold mb-10 text-center">Explore Categories</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Placeholder for categories. These would be dynamically populated */}
+            {[
+              { name: 'Technology', color: 'bg-blue-500', count: '125 Articles' },
+              { name: 'Fashion', color: 'bg-pink-500', count: '98 Articles' },
+              { name: 'Lifestyle', color: 'bg-green-500', count: '87 Articles' },
+              { name: 'Travel', color: 'bg-yellow-500', count: '64 Articles' }
+            ].map((category, index) => (
+              <div key={index} className="category-card group">
+                <div className={`h-32 rounded-lg flex items-center justify-center ${category.color} text-white`}>
+                  <div className="text-center p-4">
+                    <h3 className="text-xl font-bold mb-1 group-hover:transform group-hover:scale-105 transition-transform">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm opacity-90">{category.count}</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Trending Section */}
-      <section className="py-12 md:py-16 bg-slate-100 dark:bg-slate-800/50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold font-heading">Trending Now</h2>
-            <Link href="/blogs?sort=trending" className="flex items-center text-primary dark:text-primary-400 font-medium hover:underline">
-              View All <i className="ri-arrow-right-line ml-1"></i>
+      {/* Featured Posts Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-3xl font-bold">Featured Posts</h2>
+            <Link href="/blogs" className="text-primary hover:underline">
+              View All
             </Link>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {trendingArticle && (
-              <article className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                <div className="aspect-w-16 aspect-h-10 overflow-hidden">
-                  <img 
-                    src={trendingArticle.imageUrl} 
-                    alt={trendingArticle.title} 
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Placeholder for blog posts. These would be dynamically populated */}
+            {[
+              {
+                title: 'The Future of AI in Everyday Life',
+                category: 'Technology',
+                excerpt: 'Explore how artificial intelligence is transforming our daily activities and what to expect in the coming years.'
+              },
+              {
+                title: 'Sustainable Fashion Trends for 2025',
+                category: 'Fashion',
+                excerpt: 'Discover the eco-friendly materials and ethical practices shaping the fashion industry this year.'
+              },
+              {
+                title: 'Working Remotely: A Digital Nomad\'s Guide',
+                category: 'Lifestyle',
+                excerpt: 'Tips and strategies for maintaining productivity and work-life balance while working from anywhere in the world.'
+              }
+            ].map((post, index) => (
+              <div key={index} className="blog-card rounded-lg overflow-hidden border bg-card">
+                <div className="h-48 bg-muted"></div>
                 <div className="p-6">
-                  <div className="flex gap-2 mb-3">
-                    <span className={`px-3 py-1 text-xs font-medium ${trendingArticle.categoryColor} rounded-full`}>
-                      {trendingArticle.category}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">{trendingArticle.title}</h3>
-                  <p className="text-slate-600 dark:text-slate-300 mb-4">{trendingArticle.excerpt}</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <img 
-                        src={trendingArticle.author.avatar} 
-                        alt={trendingArticle.author.name} 
-                        className="w-8 h-8 rounded-full"
-                      />
-                      <span className="text-sm font-medium">{trendingArticle.author.name}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
-                      <i className="ri-fire-fill text-red-500"></i>
-                      <span>{trendingArticle.views} views</span>
-                    </div>
-                  </div>
+                  <div className="text-sm text-primary mb-2">{post.category}</div>
+                  <h3 className="text-xl font-bold mb-2">{post.title}</h3>
+                  <p className="text-muted-foreground mb-4">{post.excerpt}</p>
+                  <Link href={`/blog/${index}`} className="text-primary hover:underline">
+                    Read More
+                  </Link>
                 </div>
-              </article>
-            )}
-            
-            <TrendingList trendingList={trendingList} />
-          </div>
-        </div>
-      </section>
-
-      {/* Web Stories Section */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold font-heading">Web Stories</h2>
-            <Link href="/web-stories" className="flex items-center text-primary dark:text-primary-400 font-medium hover:underline">
-              View All <i className="ri-arrow-right-line ml-1"></i>
-            </Link>
-          </div>
-          
-          {/* Stories Carousel */}
-          <div className="web-story-scroll relative flex overflow-x-auto pb-6 gap-4 snap-x snap-mandatory">
-            {webStories.map((story) => (
-              <WebStoryCard key={story.id} story={story} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Categories */}
-      <section className="py-12 md:py-16 bg-slate-100 dark:bg-slate-800/50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold font-heading mb-8">Explore Categories</h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {categories.map((category) => (
-              <CategoryCard key={category.id} category={category} />
+      {/* Web Stories Preview Section */}
+      <section className="py-16">
+        <div className="container">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-3xl font-bold">Web Stories</h2>
+            <Link href="/web-stories" className="text-primary hover:underline">
+              View All
+            </Link>
+          </div>
+          <div className="flex overflow-x-auto pb-4 space-x-4 scrollbar-hide">
+            {/* Placeholder for web stories. These would be dynamically populated */}
+            {[
+              {
+                title: '10 Must-Visit Destinations in 2025',
+                category: 'Travel'
+              },
+              {
+                title: 'A Day in the Life of a Tech Entrepreneur',
+                category: 'Technology'
+              },
+              {
+                title: 'Behind the Scenes: Fashion Week',
+                category: 'Fashion'
+              },
+              {
+                title: 'Mindfulness Practices for Busy Professionals',
+                category: 'Lifestyle'
+              }
+            ].map((story, index) => (
+              <div key={index} className="flex-shrink-0 w-64 h-80 rounded-lg overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                <div className="absolute bottom-0 left-0 p-4 z-20 text-white">
+                  <div className="text-sm mb-1">{story.category}</div>
+                  <h3 className="text-lg font-bold">{story.title}</h3>
+                </div>
+                <div className="h-full w-full bg-muted"></div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Newsletter Section */}
-      <Newsletter />
+      <section className="py-16 bg-primary/5 dark:bg-primary/10">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p className="text-muted-foreground mb-8">
+              Subscribe to our newsletter to receive the latest articles, stories, and updates directly in your inbox.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="px-4 py-3 rounded-md border border-input bg-background flex-1"
+              />
+              <button className="px-6 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </MainLayout>
   );
 }
