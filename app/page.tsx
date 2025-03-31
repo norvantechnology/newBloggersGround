@@ -1,149 +1,137 @@
-import MainLayout from '@/components/layout/MainLayout';
+import Layout from "@/components/Layout";
+import Banner from "@/components/Banner";
+import BlogCard from "@/components/BlogCard";
+import CategoryCard from "@/components/CategoryCard";
+import Newsletter from "@/components/Newsletter";
+import TrendingList from "@/components/TrendingList";
+import WebStoryCard from "@/components/WebStoryCard";
+import { blogPosts } from "@/data/blog-posts";
+import { categories } from "@/data/categories";
+import { trendingItems } from "@/data/trending";
+import { webStories } from "@/data/web-stories";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <MainLayout>
-      <div className="container py-12">
-        {/* Hero Section */}
-        <section className="py-12 md:py-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              Welcome to <span className="text-primary">Bloggers Ground</span>
-            </h1>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground">
-              Discover insightful articles, engaging stories, and the latest trends
-              from our community of passionate writers.
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="/blog" 
-                className="px-6 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
-              >
-                Explore Blogs
-              </a>
-              <a 
-                href="/webstories" 
-                className="px-6 py-3 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium"
-              >
-                View Web Stories
-              </a>
-            </div>
-          </div>
-        </section>
+  const newArrivals = blogPosts.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  }).slice(0, 3);
 
-        {/* Featured Categories Section (Placeholder) */}
-        <section className="py-12">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold">Explore Categories</h2>
-            <p className="mt-4 text-muted-foreground">
-              Find content that matches your interests
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Category Cards will be populated here */}
-            {[
-              { name: 'Technology', color: 'bg-blue-500' },
-              { name: 'Fashion', color: 'bg-pink-500' },
-              { name: 'Lifestyle', color: 'bg-green-500' },
-              { name: 'Travel', color: 'bg-amber-500' }
-            ].map((category, index) => (
-              <div key={index} className={`category-card group h-48 rounded-lg ${category.color} text-white`}>
-                <div className="absolute inset-0 category-overlay bg-black bg-opacity-30 transition-all duration-300"></div>
-                <div className="relative h-full flex flex-col items-center justify-center p-6">
-                  <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-                  <p className="text-sm opacity-90">Discover {category.name} articles</p>
-                  <a href={`/blog?category=${category.name.toLowerCase()}`} className="mt-4 px-4 py-2 rounded-md bg-white/20 hover:bg-white/30 transition-colors duration-300">
-                    View Articles
-                  </a>
-                </div>
-              </div>
+  const featuredPost = blogPosts.find(post => post.featured);
+  
+  const popularWebStories = webStories.slice(0, 5);
+
+  return (
+    <Layout>
+      <Banner />
+      
+      {/* New Arrivals Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="flex justify-between items-center mb-10">
+          <h2 className="text-3xl font-bold">New Arrivals</h2>
+          <Link 
+            href="/blog" 
+            className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
+          >
+            View All
+            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {newArrivals.map((post) => (
+            <BlogCard key={post.id} article={post} />
+          ))}
+        </div>
+      </section>
+      
+      {/* Categories Section */}
+      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-10 text-center">Popular Categories</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {categories.slice(0, 6).map((category) => (
+              <CategoryCard key={category.id} category={category} />
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Featured Blogs Section (Placeholder) */}
-        <section className="py-12">
-          <div className="flex justify-between items-center mb-10">
-            <div>
-              <h2 className="text-3xl font-bold">Featured Blogs</h2>
-              <p className="mt-2 text-muted-foreground">
-                Our most popular and trending articles
-              </p>
+      {/* Trending Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          <div className="lg:col-span-3">
+            {featuredPost && (
+              <div className="relative rounded-xl overflow-hidden">
+                <img 
+                  src={featuredPost.coverImage} 
+                  alt={featuredPost.title}
+                  className="w-full h-[450px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <div className="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" 
+                    style={{ backgroundColor: featuredPost.categoryColor }}>
+                    {featuredPost.category}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">{featuredPost.title}</h3>
+                  <p className="mb-3 text-gray-200">{featuredPost.excerpt.substring(0, 120)}...</p>
+                  <div className="flex items-center text-sm">
+                    <img 
+                      src={featuredPost.author.avatar} 
+                      alt={featuredPost.author.name}
+                      className="w-10 h-10 rounded-full mr-3 object-cover" 
+                    />
+                    <div>
+                      <p className="font-medium">{featuredPost.author.name}</p>
+                      <p className="text-gray-300">{featuredPost.publishedDate} · {featuredPost.timeToRead}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="lg:col-span-2">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold">Trending Now</h3>
+              <Link href="/blog?sort=trending" className="text-blue-600 dark:text-blue-400 hover:underline">
+                See All
+              </Link>
             </div>
-            <a 
-              href="/blog" 
-              className="hidden md:block px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium"
+            <TrendingList trendingList={trendingItems} />
+          </div>
+        </div>
+      </section>
+
+      {/* Web Stories */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-3xl font-bold">Web Stories</h2>
+            <Link 
+              href="/webstories" 
+              className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
             >
               View All
-            </a>
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Blog Cards will be populated here */}
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="blog-card rounded-lg border bg-card overflow-hidden shadow-sm">
-                <div className="aspect-video w-full bg-muted"></div>
-                <div className="p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
-                      Technology
-                    </span>
-                    <span className="text-xs text-muted-foreground">5 min read</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">
-                    A blog post title that catches your attention
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    A short excerpt from the blog post that gives the reader a quick overview of what the article is about...
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-muted"></div>
-                      <span className="text-sm">John Doe</span>
-                    </div>
-                    <span className="text-xs text-muted-foreground">March 28, 2025</span>
-                  </div>
-                </div>
+          <div className="flex space-x-4 overflow-x-auto pb-4 web-story-scroll">
+            {popularWebStories.map((story) => (
+              <div key={story.id} className="flex-shrink-0 w-64">
+                <WebStoryCard story={story} />
               </div>
             ))}
           </div>
-          
-          <div className="text-center mt-8 md:hidden">
-            <a 
-              href="/blog" 
-              className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium"
-            >
-              View All Blogs
-            </a>
-          </div>
-        </section>
-
-        {/* Call to Action Section */}
-        <section className="py-12 my-12 bg-primary/5 rounded-lg">
-          <div className="max-w-3xl mx-auto text-center px-4">
-            <h2 className="text-3xl font-bold mb-6">Join Our Community</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Become a member of our growing community. Share your thoughts, discover new ideas,
-              and connect with like-minded individuals.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="/signup" 
-                className="px-6 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
-              >
-                Sign Up Now
-              </a>
-              <a 
-                href="/login" 
-                className="px-6 py-3 rounded-md bg-muted text-foreground hover:bg-muted/60 font-medium"
-              >
-                Log In
-              </a>
-            </div>
-          </div>
-        </section>
-      </div>
-    </MainLayout>
+        </div>
+      </section>
+      
+      {/* Newsletter Section */}
+      <Newsletter />
+    </Layout>
   );
 }
